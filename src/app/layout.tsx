@@ -33,7 +33,7 @@ export default function RootLayout({
               <SignInButton />
             </SignedOut>
             <SignedIn>
-              <UserButton />
+              <UserButton showName />
             </SignedIn>
           </header>
           <main>{children}</main>
