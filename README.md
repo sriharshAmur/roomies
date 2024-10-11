@@ -30,7 +30,7 @@ Roomies is a platform aimed at creating an effortless experience for tenants and
 1. **Clone the repository**:
 
    ```sh
-   git clone https://github.com/yourusername/roomies-app.git
+   git clone https://github.com/sriharshAmur/roomies-app.git
    cd roomies-app
    ```
 
