@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Roomies 🏠✨
 
-## Getting Started
+Welcome to **Roomies**, a housing web application designed to make finding homes and tenants easier and more personalized! Whether you're a tenant searching for the perfect place or a landlord looking for an ideal tenant, Roomies has got you covered.
 
-First, run the development server:
+Hosted at: [roomies.app](https://roomies.app)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Overview
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Roomies is a platform aimed at creating an effortless experience for tenants and landlords. It connects people based on their preferences to create a better housing experience. Forget about the hassle of searching through endless listings; Roomies aims to bring you personalized recommendations that match your requirements.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🎯 Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Role Toggle**: Switch between Tenant and Landlord modes effortlessly.
+- **Property Listings**: Landlords can easily create and manage property listings.
+- **Search and Filters**: Tenants can search for listings that match their needs, with options to filter by location, price, and type.
+- **Favorites**: Tenants can favorite properties to keep track of them.
+- **Personalized Dashboard**: A unique dashboard for both tenants and landlords to manage listings, favorites, and more.
 
-## Learn More
+## 🔧 Technologies Used
 
-To learn more about Next.js, take a look at the following resources:
+- **Next.js (v14.2)** with App Router and React Server Components for a modern, seamless experience.
+- **Tailwind CSS** for a responsive and beautiful design.
+- **shadcn** for UI components.
+- **Drizzle ORM** and **Neon DB** for robust data management.
+- **Clerk.js** for easy and secure authentication (Google & GitHub supported).
+- **Vercel** for hosting.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Getting Started
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Clone the repository**:
 
-## Deploy on Vercel
+   ```sh
+   git clone https://github.com/yourusername/roomies-app.git
+   cd roomies-app
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Install dependencies**:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   ```sh
+   npm install
+   ```
+
+3. **Run the app locally**:
+
+   ```sh
+   npm run dev
+   ```
+
+4. **Visit**: Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 🔑 Authentication
+
+We use **Clerk.js** for authentication. Users can log in using Google or GitHub. Depending on the role they select (tenant or landlord), they will have different dashboard views.
+
+## 📦 Deployment
+
+Roomies is hosted on **Vercel** for easy scalability and excellent performance. To deploy your own version, push to your repository, and connect it to Vercel.
+
+**Happy Renting! 🏡💙**
