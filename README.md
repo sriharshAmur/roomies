@@ -1,12 +1,12 @@
-# Roomies 🏠✨
+# Rooomies 🏠✨
 
-Welcome to **Roomies**, a housing web application designed to make finding homes and tenants easier and more personalized! Whether you're a tenant searching for the perfect place or a landlord looking for an ideal tenant, Roomies has got you covered.
+Welcome to **Rooomies**, a housing web application designed to make finding homes and tenants easier and more personalized! Whether you're a tenant searching for the perfect place or a landlord looking for an ideal tenant, rooomies has got you covered.
 
-Hosted at: [roomies.app](https://roomies.app)
+Hosted at: [rooomies.app](https://rooomies.app)
 
 ## 🚀 Overview
 
-Roomies is a platform aimed at creating an effortless experience for tenants and landlords. It connects people based on their preferences to create a better housing experience. Forget about the hassle of searching through endless listings; Roomies aims to bring you personalized recommendations that match your requirements.
+rooomies is a platform aimed at creating an effortless experience for tenants and landlords. It connects people based on their preferences to create a better housing experience. Forget about the hassle of searching through endless listings; rooomies aims to bring you personalized recommendations that match your requirements.
 
 ## 🎯 Features
 
@@ -54,6 +54,6 @@ We use **Clerk.js** for authentication. Users can log in using Google or GitHub.
 
 ## 📦 Deployment
 
-Roomies is hosted on **Vercel** for easy scalability and excellent performance. To deploy your own version, push to your repository, and connect it to Vercel.
+Rooomies is hosted on **Vercel** for easy scalability and excellent performance. To deploy your own version, push to your repository, and connect it to Vercel.
 
 **Happy Renting! 🏡💙**
