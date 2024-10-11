@@ -5,6 +5,7 @@ import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Home, User, Search, Building, Key, BarChart, Shield } from 'lucide-react';
 import Link from 'next/link';
+import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 
 export default function LandingPage() {
   const [userType, setUserType] = useState<'tenant' | 'landlord'>('tenant');
@@ -54,12 +55,25 @@ export default function LandingPage() {
             >
               Properties
             </Link>
-            <Link
-              href='/login'
-              className='text-sm text-white border border-white px-3 py-1 rounded-md transition-colors hover:bg-white hover:text-[hsl(var(--tenant-from))]'
-            >
-              Login
-            </Link>
+            <SignedOut>
+              <SignInButton>
+                <button className='text-sm text-white border border-white px-3 py-1 rounded-md transition-colors hover:bg-white hover:text-[hsl(var(--tenant-from))]'>
+                  Login
+                </button>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <div className='text-white'>
+                <UserButton
+                  showName
+                  appearance={{
+                    elements: {
+                      userButtonOuterIdentifier: 'text-white',
+                    },
+                  }}
+                />
+              </div>
+            </SignedIn>
           </nav>
         </div>
       </header>
