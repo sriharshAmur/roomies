@@ -1,6 +1,12 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 
-const isProtectedRoute = createRouteMatcher(['/messages(.*)']);
+// Only protect landlord and tenant routes
+const isProtectedRoute = createRouteMatcher([
+  '/landlord/(.*)',
+  '/tenant/(.*)',
+  '/landlord/dashboard(.*)',
+  '/tenant/dashboard(.*)',
+]);
 
 export default clerkMiddleware((auth, req) => {
   if (isProtectedRoute(req)) auth().protect();
