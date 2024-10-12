@@ -8,6 +8,13 @@
       "when": 1727615462305,
       "tag": "0000_late_shinobi_shaw",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1728752632572,
+      "tag": "0001_chemical_jasper_sitwell",
+      "breakpoints": true
     }
   ]
 }
