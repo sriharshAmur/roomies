@@ -1,7 +1,5 @@
 'use client';
 
-import Footer from '@/components/Footer';
-import NavigationHeader from '@/components/Header';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { useUserStore } from '@/components/providers/user-store-provider';
@@ -13,8 +11,6 @@ export default function LandingPage() {
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-background via-background-secondary to-background-tertiary transition-colors duration-300'>
-      <NavigationHeader />
-
       <main className='container mx-auto px-4'>
         <section className='py-24 md:py-32 lg:py-40 text-center relative overflow-hidden mt-12'>
           <DotBackground />
@@ -168,8 +164,6 @@ export default function LandingPage() {
           </Button>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }

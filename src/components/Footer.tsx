@@ -1,3 +1,5 @@
+'use client';
+
 import { useUserStore } from '@/components/providers/user-store-provider';
 import Link from 'next/link';
 

@@ -1,3 +1,5 @@
+import Footer from '@/components/Footer';
+import NavigationHeader from '@/components/Header';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { UserStoreProvider } from '@/components/providers/user-store-provider';
 import { ClerkProvider } from '@clerk/nextjs';
@@ -32,7 +34,9 @@ export default function RootLayout({
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
             <UserStoreProvider>
+              <NavigationHeader />
               <main>{children}</main>
+              <Footer />
             </UserStoreProvider>
           </ThemeProvider>
         </body>
