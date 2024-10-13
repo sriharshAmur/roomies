@@ -1,4 +1,5 @@
 import { pgTable, uuid, varchar, text, boolean, decimal, integer, timestamp, pgEnum } from 'drizzle-orm/pg-core';
+import { type InferSelectModel, type InferInsertModel } from 'drizzle-orm';
 
 // Enums
 export const furnishedTypeEnum = pgEnum('furnished_type', ['fully', 'partially', 'unfurnished']);
@@ -157,6 +158,32 @@ export const reviews = pgTable('reviews', {
   comments: text('comments'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });
+
+// export types of all schemas
+export type SelectProperties = InferSelectModel<typeof properties>;
+export type InsertProperties = InferInsertModel<typeof properties>;
+export type SelectHouseTypes = InferSelectModel<typeof houseTypes>;
+export type InsertHouseTypes = InferInsertModel<typeof houseTypes>;
+export type SelectLocations = InferSelectModel<typeof locations>;
+export type InsertLocations = InferInsertModel<typeof locations>;
+export type SelectRentDetails = InferSelectModel<typeof rentDetails>;
+export type InsertRentDetails = InferInsertModel<typeof rentDetails>;
+export type SelectApplications = InferSelectModel<typeof applications>;
+export type InsertApplications = InferInsertModel<typeof applications>;
+export type SelectFavorites = InferSelectModel<typeof favorites>;
+export type InsertFavorites = InferInsertModel<typeof favorites>;
+export type SelectAmenities = InferSelectModel<typeof amenities>;
+export type InsertAmenities = InferInsertModel<typeof amenities>;
+export type SelectPropertyAmenities = InferSelectModel<typeof propertyAmenities>;
+export type InsertPropertyAmenities = InferInsertModel<typeof propertyAmenities>;
+export type SelectPropertyImages = InferSelectModel<typeof propertyImages>;
+export type InsertPropertyImages = InferInsertModel<typeof propertyImages>;
+export type SelectUserInteractions = InferSelectModel<typeof userInteractions>;
+export type InsertUserInteractions = InferInsertModel<typeof userInteractions>;
+export type SelectTenantPreferences = InferSelectModel<typeof tenantPreferences>;
+export type InsertTenantPreferences = InferInsertModel<typeof tenantPreferences>;
+export type SelectReviews = InferSelectModel<typeof reviews>;
+export type InsertReviews = InferInsertModel<typeof reviews>;
 
 // Exporting all schemas
 export default {
