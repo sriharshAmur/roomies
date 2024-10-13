@@ -1,6 +1,8 @@
+import { ThemeProvider } from '@/components/providers/theme-provider';
+import { UserStoreProvider } from '@/components/providers/user-store-provider';
+import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import { ClerkProvider } from '@clerk/nextjs';
 import './globals.css';
 
 const geistSans = localFont({
@@ -26,9 +28,13 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang='en'>
+      <html lang='en' suppressHydrationWarning>
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <main>{children}</main>
+          <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
+            <UserStoreProvider>
+              <main>{children}</main>
+            </UserStoreProvider>
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>
