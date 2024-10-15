@@ -1,30 +1,45 @@
 'use server';
 
 import { currentUser } from '@clerk/nextjs/server';
-import { UserMessages } from './db/schema';
-import { db } from './db';
 import { redirect } from 'next/navigation';
-import { eq } from 'drizzle-orm';
+import { v4 as uuidv4 } from 'uuid';
+import { db } from '../db';
+import { properties } from '../db/schema';
+import { InferInsertModel } from 'drizzle-orm';
 
-export async function createUserMessage(formData: FormData) {
+export async function addProperty(formData: FormData) {
   const user = await currentUser();
   if (!user) throw new Error('User not found');
 
-  const message = formData.get('message') as string;
+  // Validate form data
+  const title = formData.get('title')?.toString();
+  const description = formData.get('description')?.toString();
+  const rentAmount = parseFloat(formData.get('rentAmount')?.toString() || '0');
+  const furnishedType = formData.get('furnishedType')?.toString() as 'fully' | 'partially' | 'unfurnished';
 
-  await db.insert(UserMessages).values({
-    user_id: user.id,
-    message,
-  });
+  if (!title || !description || isNaN(rentAmount) || rentAmount <= 0 || !furnishedType) {
+    throw new Error('Please fill in all required fields correctly.');
+  }
 
-  redirect('/');
-}
+  const newPropertyId = uuidv4();
 
-export async function deleteUserMessage() {
-  const user = await currentUser();
-  if (!user) throw new Error('User not found');
+  const newProperty: InferInsertModel<typeof properties> = {
+    id: newPropertyId,
+    title,
+    description,
+    landlordId: user.id,
+    houseTypeId: formData.get('houseTypeId')!.toString(),
+    locationId: formData.get('locationId')!.toString(),
+    rentDetailsId: formData.get('rentDetailsId')!.toString(),
+    isShared: formData.get('isShared') === 'true',
+    isFurnished: formData.get('isFurnished') === 'true',
+    furnishedType,
+    visibilityStatus: 'listed',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
 
-  await db.delete(UserMessages).where(eq(UserMessages.user_id, user.id));
+  await db.insert(properties).values(newProperty);
 
-  redirect('/messages');
+  redirect(`/landlord/dashboard/${newPropertyId}`);
 }
