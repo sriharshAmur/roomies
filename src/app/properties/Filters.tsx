@@ -19,7 +19,7 @@ const cities = ['Enschede', 'Amsterdam', 'Utrecht', 'Rotterdam', 'The Hague'];
 const houseTypes = ['Apartment', 'Studio', 'House', 'Room'];
 const furnishedTypes = ['Fully Furnished', 'Partially Furnished', 'Unfurnished'];
 
-const PriceControl = ({ value, onChange }) => {
+const PriceControl = ({ value, onChange }: { value: number[]; onChange: (value: number[]) => void }) => {
   return (
     <div className='grid gap-4 w-full'>
       <Slider
@@ -33,7 +33,7 @@ const PriceControl = ({ value, onChange }) => {
       />
       <div className='flex gap-2 flex-wrap'>
         <ol className='flex items-center w-full gap-3'>
-          {value.map((val, index) => (
+          {value.map((val: number, index: number) => (
             <li key={index} className='flex items-center justify-between w-full border px-3 h-10 rounded-md'>
               <span>€</span>
               <Input
@@ -95,7 +95,19 @@ const Filters = () => {
 
   const applyFiltersAndUpdateURL = () => {
     const params = new URLSearchParams(searchParams);
-    const defaultFilters = {
+
+    type Filters = {
+      minRent: string;
+      maxRent: string;
+      city: string;
+      houseTypes: string[];
+      furnishedTypes: string[];
+      petFriendly: string;
+      utilitiesIncluded: string;
+      parkingAvailable: string;
+    };
+
+    const defaultFilters: Filters = {
       minRent: '600',
       maxRent: '2500',
       city: '',
@@ -106,7 +118,7 @@ const Filters = () => {
       parkingAvailable: 'false',
     };
 
-    const currentFilters = {
+    const currentFilters: Filters = {
       minRent: rentRange[0].toString(),
       maxRent: rentRange[1].toString(),
       city: selectedCity,
@@ -119,15 +131,19 @@ const Filters = () => {
 
     Object.entries(currentFilters).forEach(([key, value]) => {
       if (Array.isArray(value)) {
-        if (value.length > 0 && value.join(',') !== defaultFilters[key].join(',')) {
+        const defaultArrayValue = defaultFilters[key as keyof Filters] as string[];
+        if (value.length > 0 && value.join(',') !== defaultArrayValue.join(',')) {
           params.set(key, value.join(','));
         } else {
           params.delete(key);
         }
-      } else if (value !== defaultFilters[key]) {
-        params.set(key, value);
       } else {
-        params.delete(key);
+        const defaultValue = defaultFilters[key as keyof Filters] as string;
+        if (value !== defaultValue) {
+          params.set(key, value);
+        } else {
+          params.delete(key);
+        }
       }
     });
 
