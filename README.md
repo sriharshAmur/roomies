@@ -48,6 +48,42 @@ rooomies is a platform aimed at creating an effortless experience for tenants an
 
 4. **Visit**: Open [http://localhost:3000](http://localhost:3000) in your browser.
 
+## Database Migration, Push, and Seeding Instructions
+
+Follow these steps to migrate, push, and seed your database using Drizzle and Neon DB.
+
+### Step 1: Migration
+
+Use Drizzle to create and apply migrations to your database.
+
+```sh
+npx drizzle-kit generate
+npx drizzle-kit migration
+```
+
+### Step 2: Pushing Migration to Database
+
+This will push your generated migrations to Neon DB:
+
+```sh
+npx drizzle-kit push
+```
+
+### Step 3: Seeding the Database
+
+Run the following command to seed your database with the initial data:
+
+```sh
+npx tsx src/db/seed.ts
+```
+
+This command runs the seeding script and populates the database with the necessary records, such as properties, locations, and amenities.
+
+### Notes
+
+- Make sure to set the environment variables correctly, including the `DATABASE_URL` and `CLERK_USER_ID`, in your `.env.local` file.
+- If you want to clear all data and re-seed the database, you can drop all tables or use the relevant Drizzle command, then run the migration and seed commands again.
+
 ## 🔑 Authentication
 
 We use **Clerk.js** for authentication. Users can log in using Google or GitHub. Depending on the role they select (tenant or landlord), they will have different dashboard views.

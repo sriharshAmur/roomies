@@ -1,10 +1,22 @@
 // Seed Script for Roomies Database
 
-import { db } from '.';
-import { properties, houseTypes, locations, rentDetails, amenities, propertyAmenities } from './schema';
-import { v4 as uuidv4 } from 'uuid';
 import dotenv from 'dotenv';
-import { InferInsertModel } from 'drizzle-orm';
+import { v4 as uuidv4 } from 'uuid';
+import { db } from '.';
+import {
+  amenities,
+  AmenityInsert,
+  HouseTypeInsert,
+  houseTypes,
+  LocationInsert,
+  locations,
+  properties,
+  propertyAmenities,
+  PropertyAmenityInsert,
+  PropertyInsert,
+  RentDetailInsert,
+  rentDetails,
+} from './schema';
 
 dotenv.config();
 
@@ -14,30 +26,22 @@ if (!CLERK_USER_ID) {
   throw new Error('Clerk user ID not found in environment variables');
 }
 
-// Defining types using InferInsertModel for type safety
-type HouseTypeInsert = InferInsertModel<typeof houseTypes>;
-type LocationInsert = InferInsertModel<typeof locations>;
-type RentDetailsInsert = InferInsertModel<typeof rentDetails>;
-type PropertyInsert = InferInsertModel<typeof properties>;
-type AmenityInsert = InferInsertModel<typeof amenities>;
-type PropertyAmenityInsert = InferInsertModel<typeof propertyAmenities>;
-
 async function seedDatabase() {
   try {
     // Adding House Types
     const houseTypesData: HouseTypeInsert[] = [
       {
-        houseTypeId: uuidv4(),
+        id: uuidv4(),
         name: 'Apartment',
         description: 'A unit in a larger building with shared amenities.',
       },
       {
-        houseTypeId: uuidv4(),
+        id: uuidv4(),
         name: 'Villa',
         description: 'A standalone luxury property, often with a garden.',
       },
       {
-        houseTypeId: uuidv4(),
+        id: uuidv4(),
         name: 'Room',
         description: 'A single room available for rent, typically within a shared house.',
       },
@@ -47,7 +51,7 @@ async function seedDatabase() {
     // Adding Locations
     const locationsData: LocationInsert[] = [
       {
-        locationId: uuidv4(),
+        id: uuidv4(),
         address: '123 Main St',
         city: 'Enschede',
         state: 'Overijssel',
@@ -57,7 +61,7 @@ async function seedDatabase() {
         longitude: '6.8937',
       },
       {
-        locationId: uuidv4(),
+        id: uuidv4(),
         address: '456 Elm St',
         city: 'Amsterdam',
         state: 'North Holland',
@@ -67,7 +71,7 @@ async function seedDatabase() {
         longitude: '4.9041',
       },
       {
-        locationId: uuidv4(),
+        id: uuidv4(),
         address: '789 Oak Ave',
         city: 'Utrecht',
         state: 'Utrecht',
@@ -80,9 +84,9 @@ async function seedDatabase() {
     await db.insert(locations).values(locationsData);
 
     // Adding Rent Details
-    const rentDetailsData: RentDetailsInsert[] = [
+    const rentDetailsData: RentDetailInsert[] = [
       {
-        rentDetailsId: uuidv4(),
+        id: uuidv4(),
         rentAmount: '1200',
         currency: 'EUR',
         securityDeposit: '1200',
@@ -90,7 +94,7 @@ async function seedDatabase() {
         otherCharges: '75',
       },
       {
-        rentDetailsId: uuidv4(),
+        id: uuidv4(),
         rentAmount: '2500',
         currency: 'EUR',
         securityDeposit: '2500',
@@ -98,7 +102,7 @@ async function seedDatabase() {
         otherCharges: '100',
       },
       {
-        rentDetailsId: uuidv4(),
+        id: uuidv4(),
         rentAmount: '600',
         currency: 'EUR',
         securityDeposit: '600',
@@ -111,22 +115,22 @@ async function seedDatabase() {
     // Adding Amenities
     const amenitiesData: AmenityInsert[] = [
       {
-        amenityId: uuidv4(),
+        id: uuidv4(),
         name: 'WiFi',
         description: 'High-speed internet available.',
       },
       {
-        amenityId: uuidv4(),
+        id: uuidv4(),
         name: 'Parking',
         description: 'Dedicated parking space available.',
       },
       {
-        amenityId: uuidv4(),
+        id: uuidv4(),
         name: 'Swimming Pool',
         description: 'Access to a shared swimming pool.',
       },
       {
-        amenityId: uuidv4(),
+        id: uuidv4(),
         name: 'Garden',
         description: 'Private or shared garden available.',
       },
@@ -136,48 +140,66 @@ async function seedDatabase() {
     // Adding Properties
     const propertiesData: PropertyInsert[] = [
       {
-        propertyId: uuidv4(),
+        id: uuidv4(),
         title: 'Cozy Apartment in Enschede',
         description: 'A comfortable apartment in the heart of Enschede with easy access to public transport.',
-        houseTypeId: houseTypesData[0].houseTypeId!,
-        locationId: locationsData[0].locationId!,
-        rentDetailsId: rentDetailsData[0].rentDetailsId!,
+        houseTypeId: houseTypesData[0].id!,
+        locationId: locationsData[0].id!,
+        rentDetailsId: rentDetailsData[0].id!,
         landlordId: CLERK_USER_ID!,
         isShared: false,
         isFurnished: true,
         furnishedType: 'fully',
         visibilityStatus: 'listed',
+        bedrooms: 2,
+        bathrooms: 1,
+        availableFrom: new Date('2024-11-01'),
+        leaseDurationMin: 6,
+        leaseDurationMax: 12,
+        yearBuilt: 2005,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        propertyId: uuidv4(),
+        id: uuidv4(),
         title: 'Luxury Villa in Amsterdam',
         description: 'A stunning villa with a private pool and garden, perfect for a family.',
-        houseTypeId: houseTypesData[1].houseTypeId!,
-        locationId: locationsData[1].locationId!,
-        rentDetailsId: rentDetailsData[1].rentDetailsId!,
+        houseTypeId: houseTypesData[0].id!,
+        locationId: locationsData[0].id!,
+        rentDetailsId: rentDetailsData[0].id!,
         landlordId: CLERK_USER_ID!,
         isShared: false,
         isFurnished: true,
         furnishedType: 'fully',
         visibilityStatus: 'listed',
+        bedrooms: 4,
+        bathrooms: 3,
+        availableFrom: new Date('2024-12-01'),
+        leaseDurationMin: 12,
+        leaseDurationMax: 24,
+        yearBuilt: 2015,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        propertyId: uuidv4(),
+        id: uuidv4(),
         title: 'Single Room in Shared House, Utrecht',
         description: 'A budget-friendly room in a shared house with great roommates.',
-        houseTypeId: houseTypesData[2].houseTypeId!,
-        locationId: locationsData[2].locationId!,
-        rentDetailsId: rentDetailsData[2].rentDetailsId!,
+        houseTypeId: houseTypesData[0].id!,
+        locationId: locationsData[0].id!,
+        rentDetailsId: rentDetailsData[0].id!,
         landlordId: CLERK_USER_ID!,
         isShared: true,
         sharedWith: 3,
         isFurnished: true,
         furnishedType: 'partially',
         visibilityStatus: 'listed',
+        bedrooms: 1,
+        bathrooms: 1,
+        availableFrom: new Date('2024-10-15'),
+        leaseDurationMin: 3,
+        leaseDurationMax: 6,
+        yearBuilt: 1990,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -187,29 +209,24 @@ async function seedDatabase() {
     // Adding Property Amenities
     const propertyAmenitiesData: PropertyAmenityInsert[] = [
       {
-        propertyAmenityId: uuidv4(),
-        propertyId: propertiesData[0].propertyId!,
-        amenityId: amenitiesData[0].amenityId!,
+        propertyId: propertiesData[0].id!,
+        amenityId: amenitiesData[0].id!,
       },
       {
-        propertyAmenityId: uuidv4(),
-        propertyId: propertiesData[0].propertyId!,
-        amenityId: amenitiesData[1].amenityId!,
+        propertyId: propertiesData[0].id!,
+        amenityId: amenitiesData[1].id!,
       },
       {
-        propertyAmenityId: uuidv4(),
-        propertyId: propertiesData[1].propertyId!,
-        amenityId: amenitiesData[2].amenityId!,
+        propertyId: propertiesData[1].id!,
+        amenityId: amenitiesData[2].id!,
       },
       {
-        propertyAmenityId: uuidv4(),
-        propertyId: propertiesData[1].propertyId!,
-        amenityId: amenitiesData[3].amenityId!,
+        propertyId: propertiesData[1].id!,
+        amenityId: amenitiesData[3].id!,
       },
       {
-        propertyAmenityId: uuidv4(),
-        propertyId: propertiesData[2].propertyId!,
-        amenityId: amenitiesData[0].amenityId!,
+        propertyId: propertiesData[2].id!,
+        amenityId: amenitiesData[1].id!,
       },
     ];
     await db.insert(propertyAmenities).values(propertyAmenitiesData);
