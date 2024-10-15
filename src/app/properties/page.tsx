@@ -34,16 +34,14 @@ export default async function PropertiesPage() {
 
   return (
     <div className='container mx-auto px-4 py-8'>
-      <div className='mb-8'>
+      <div className='lg:mb-8'>
         <h1 className='text-2xl font-medium  text-foreground mb-4'>Find Your Perfect Home</h1>
         <Search />
       </div>
 
       <div className='flex flex-col lg:flex-row gap-8'>
         <div className='w-full lg:w-1/4'>
-          <div className='sticky top-20 lg:top-24'>
-            <Filters />
-          </div>
+          <Filters />
         </div>
         <div className='w-full lg:w-3/4'>
           <div className='mb-6'>
