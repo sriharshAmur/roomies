@@ -304,7 +304,7 @@ export type ReviewSelect = InferSelectModel<typeof reviews>;
 export type ReviewInsert = InferInsertModel<typeof reviews>;
 
 // Exporting all schemas
-export default {
+const schemas = {
   properties,
   houseTypes,
   locations,
@@ -318,3 +318,5 @@ export default {
   tenantPreferences,
   reviews,
 };
+
+export default schemas;
