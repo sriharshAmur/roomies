@@ -107,7 +107,7 @@ const UserRoleToggle = () => {
       <div
         className='absolute inset-y-0.5 w-1/2 bg-background rounded-full transition-all duration-300 ease-in-out shadow-sm'
         style={{
-          transform: userRole === 'tenant' ? 'translateX(0)' : 'translateX(100%)',
+          transform: userRole === 'tenant' ? 'translateX(0)' : 'translateX(calc(100% - 0.2rem))',
         }}
       ></div>
       <div className='relative flex'>
